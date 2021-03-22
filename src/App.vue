@@ -1,30 +1,26 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+<div id="app">
+  <aside-menu ref="aside-menu" @triggerMarkerPopup="openPopup"></aside-menu>
+  <!-- 地圖區塊 -->
+  <mask-map class="mask-map" id="mask-map" ref="map"></mask-map>
+</div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+<script>
+import AsideMenu from './components/AsideMenu'
+import MaskMap from './components/MaskMap'
+export default {
+  name: 'App',
+  components: {
+    AsideMenu,
+    MaskMap
+  },
+  methods: {
+    openPopup (id) {
+      this.$refs.map.triggerPopup(id)
     }
   }
 }
-</style>
+</script>
+
+<style lang="scss" src="./assets/style/style.scss"></style>
