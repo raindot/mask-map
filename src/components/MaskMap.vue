@@ -18,8 +18,8 @@ export default {
       center: [25.03, 121.55],
       zoom: 14
     })
-    delete L.Icon.Default.prototype._getIconUrl
-    L.Icon.Default.prototype.options.iconUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png'
+    // delete L.Icon.Default.prototype._getIconUrl
+    // L.Icon.Default.prototype.options.iconUrl = 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png'
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '<a target="_blank" href="https://www.openstreetmap.org/">OpenStreetMap</a>',
       maxZoom: 18
@@ -27,16 +27,20 @@ export default {
   },
   methods: {
     addMarker (item) {
-      const ICON = {
-        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
-        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-        iconSize: [25, 41],
-        iconAnchor: [12, 41],
-        shadowSize: [41, 41]
-      }
-      const marker = L.marker([item.longitude, item.latitude], ICON)
+      // const ICON = {
+      //   iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+      //   shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      //   iconSize: [25, 41],
+      //   iconAnchor: [12, 41],
+      //   shadowSize: [41, 41]
+      // }
+      const marker = L.marker([item.longitude, item.latitude])
         .addTo(this.map)
-        .bindPopup(`<h2 class="popup-name">${item.name}</h2>`)
+        .bindPopup(`<h4 class="popup-name">${item.name}</h4>
+        <div class="row text-white flex-nowrap">
+          <div class="col fs-6 text-nowrap adult-mask rounded-3 me-2 px-2 py-2">成人：${item.mask_adult}</div>
+          <div class="col fs-6 text-nowrap child-mask rounded-3 px-2 py-2">兒童：${item.mask_child}</div>
+        </div>`)
       marker.markerId = item.id
       marker.lng = item.longitude
       marker.lat = item.latitude

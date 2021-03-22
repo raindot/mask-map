@@ -1,8 +1,10 @@
 <template>
-<div id="app">
-  <aside-menu ref="aside-menu" @triggerMarkerPopup="openPopup"></aside-menu>
-  <!-- 地圖區塊 -->
-  <mask-map class="mask-map" id="mask-map" ref="map"></mask-map>
+<div id="app container bg-light">
+  <div class="row">
+    <aside-menu class="col-4" ref="aside-menu" @triggerMarkerPopup="openPopup"></aside-menu>
+    <!-- 地圖區塊 -->
+    <mask-map class="col-8" id="mask-map" ref="map"></mask-map>
+  </div>
 </div>
 </template>
 
@@ -22,5 +24,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" src="./assets/style/style.scss"></style>
