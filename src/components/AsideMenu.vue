@@ -23,7 +23,7 @@
       <input class="form-control" v-model="keywords" type="text" placeholder="請輸入關鍵字">
     </div>
     <div class="store card my-3 mx-2" v-for="store in filteredStores" :key="store.id"
-      @click="$emit('triggerMarkerPopup', store.id)">
+      @click="triggerPopup(store.id)">
       <div class="card-body">
         <div class="row gx-1 text-white flex-nowrap">
           <div class="col mask-count adult-mask rounded-3 me-3 px-3 py-3">
@@ -54,50 +54,22 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-
+import { toRefs, inject, watch } from 'vue'
 export default {
-  methods: {
-    ...mapActions(['fetchLocations', 'fetchPharmacies']),
-    keywordHighlight (val) {
-      return val.replace(new RegExp(this.keywords, 'g'), `<span class="highlight">${this.keywords}</span>`)
-    }
-  },
-  mounted () {
-    this.fetchLocations()
-    this.fetchPharmacies()
-  },
-  computed: {
-    currCity: {
-      get () {
-        return this.$store.state.currCity
-      },
-      set (value) {
-        this.$store.commit('setcurrCity', value)
-      }
-    },
-    currDistrict: {
-      get () {
-        return this.$store.state.currDistrict
-      },
-      set (value) {
-        this.$store.commit('setcurrDistrict', value)
-      }
-    },
-    keywords: {
-      get () {
-        return this.$store.state.keywords
-      },
-      set (value) {
-        this.$store.commit('setKeywords', value)
-      }
-    },
-    ...mapGetters(['cityList', 'districtList', 'filteredStores'])
-  },
-  watch: {
-    districtList (v) {
+  setup () {
+    const mapStore = inject('mapStore')
+    const map = inject('map')
+    const { state } = mapStore
+    const { triggerPopup } = map
+    const keywordHighlight = (val) => val.replace(new RegExp(state.keywords, 'g'), `<span class="highlight">${state.keywords}</span>`)
+    watch(() => state.districtList, v => {
       const [arr] = v
-      this.currDistrict = arr.name
+      state.currDistrict = arr.name
+    })
+    return {
+      ...toRefs(state),
+      keywordHighlight,
+      triggerPopup
     }
   }
 }
