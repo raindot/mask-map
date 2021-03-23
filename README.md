@@ -1,5 +1,5 @@
 # mask-map
-[DEMO] https://raindot.github.io/mask-map
+[DEMO](https://raindot.github.io/mask-map)
 
 ## Project setup
 ```
