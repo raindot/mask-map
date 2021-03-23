@@ -26,11 +26,11 @@
       @click="triggerPopup(store.id)">
       <div class="card-body">
         <div class="row gx-1 text-white flex-nowrap">
-          <div class="col mask-count adult-mask rounded-3 me-3 px-3 py-3">
+          <div class="col mask-count adult-mask rounded-3 me-3 py-3 text-center">
             <span>大人口罩</span>
             <div class="fs-3 text-nowrap">{{ store.mask_adult }} <span class="fs-5">個</span></div>
           </div>
-          <div class="col mask-count child-mask rounded-3 px-3 py-3">
+          <div class="col mask-count child-mask rounded-3 py-3 text-center">
             <span>兒童口罩</span>
             <div class="fs-3 text-nowrap">{{ store.mask_child }} <span class="fs-5">個</span></div>
           </div>
